@@ -1,11 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 
-function Task() {
+function Task(props) {
+
+  function handleDelete(e){
+    e.target.parentNode.remove();
+  }
+
+  const [selected, setSelected] = useState(false);
+
+  function handleFilter(e){
+    Promise.resolve(selected).then(() => setSelected(!selected)).then(() => {
+      console.log(selected);
+      selected ? e.target.className = 'selected' : e.target.className = '';
+    })
+  }
+
   return (
     <div className="task">
-      <div className="label">CATEGORY HERE</div>
-      <div className="text">TEXT HERE</div>
-      <button className="delete">X</button>
+      <div className="label">{props.category}</div>
+      <div className="text">{props.text}</div>
+      <button onClick={handleDelete} className="delete">X</button>
     </div>
   );
 }

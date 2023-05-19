@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 
-function CategoryFilter() {
+function CategoryFilter(props) {
+
+
+
   return (
     <div className="categories">
       <h5>Category filters</h5>
-      {/* render <button> elements for each category here */}
+      {props.CATEGORIES.map((category, i) => (
+        <button key={i} onClick={props.handleFilter}>{category}</button>
+      ))}
     </div>
   );
 }

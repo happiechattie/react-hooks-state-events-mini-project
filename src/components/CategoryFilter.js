@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 
 function CategoryFilter(props) {
-
-
-
   return (
     <div className="categories">
       <h5>Category filters</h5>

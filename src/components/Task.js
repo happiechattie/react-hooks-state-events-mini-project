@@ -6,15 +6,6 @@ function Task(props) {
     e.target.parentNode.remove();
   }
 
-  const [selected, setSelected] = useState(false);
-
-  function handleFilter(e){
-    Promise.resolve(selected).then(() => setSelected(!selected)).then(() => {
-      console.log(selected);
-      selected ? e.target.className = 'selected' : e.target.className = '';
-    })
-  }
-
   return (
     <div className="task">
       <div className="label">{props.category}</div>

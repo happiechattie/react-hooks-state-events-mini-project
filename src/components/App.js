@@ -16,22 +16,29 @@ function App() {
     for (let i = 0; i < buttons.length; i++) {
       buttons.item(i).className='';
     }
-    // Promise.resolve(selected).then(() => setSelected(selected => !selected)).then(() => {
-    //   e.target.className = 'selected';
-    // });
-    // console.log(selected);
-
     e.target.className = 'selected';
     setCategorySelected(e.target.innerText)
 
+  }
+
+  const arrayToDisplay = (
+    TASKS.filter(task => {
+      if (categorySelected === 'All') return true;
+      else return (task.category === categorySelected)})
+  )
+
+  const [array, setArray] = useState(TASKS)
+
+  function handleSubmit(newTask){
+    setArray([...array, newTask]);
   }
 
   return (
     <div className="App">
       <h2>My tasks</h2>
       <CategoryFilter handleFilter={handleFilter} CATEGORIES={CATEGORIES}/>
-      <NewTaskForm />
-      <TaskList categorySelected={categorySelected} TASKS={TASKS} />
+      <NewTaskForm onTaskFormSubmit={handleSubmit} CATEGORIES={CATEGORIES} />
+      <TaskList array={array} categorySelected={categorySelected} TASKS={TASKS} />
     </div>
   );
 }

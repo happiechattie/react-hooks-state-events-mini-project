@@ -4,13 +4,18 @@ import { v4 as uuid } from "uuid";
 
 function TaskList(props) {
 
-  console.log(props.array);
+  const taskList = props.TASKS.map(task => (
+    <Task
+    handleDelete={props.handleDelete}
+    key={uuid()}
+    className='task'
+    text={task.text}
+    category={task.category}/>
+  ))
 
   return (
     <div className="tasks">
-      {props.array.map((task) => (
-        <Task key={uuid()} className='task' text={task.text} category={task.category} />
-      ))}
+      {taskList}
     </div>
   );
 }

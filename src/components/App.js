@@ -10,35 +10,38 @@ import { CATEGORIES, TASKS } from "../data";
 function App() {
 
   const [categorySelected, setCategorySelected] = useState('All');
+  const [array, setArray] = useState(TASKS)
 
-  function handleFilter(e){
+  function changeCategory(category){
     const buttons = document.querySelector('.categories').querySelectorAll('button');
     for (let i = 0; i < buttons.length; i++) {
-      buttons.item(i).className='';
+      if (category === buttons.innerText) 
+          buttons.item(i).className = 'selected';
+        else
+          buttons.item(i).className=null;
     }
-    e.target.className = 'selected';
-    setCategorySelected(e.target.innerText)
-
+    setCategorySelected(category)
   }
 
-  const arrayToDisplay = (
-    TASKS.filter(task => {
+  const filteredArray = array.filter(task => {
       if (categorySelected === 'All') return true;
-      else return (task.category === categorySelected)})
-  )
+      else return (task.category === categorySelected)});
 
-  const [array, setArray] = useState(TASKS)
 
   function handleSubmit(newTask){
     setArray([...array, newTask]);
   }
 
+  function handleDelete(taskText){
+    setArray(array.filter(task => task.text !== taskText));
+  }
+
   return (
     <div className="App">
       <h2>My tasks</h2>
-      <CategoryFilter handleFilter={handleFilter} CATEGORIES={CATEGORIES}/>
+      <CategoryFilter changeCategory={changeCategory} CATEGORIES={CATEGORIES}/>
       <NewTaskForm onTaskFormSubmit={handleSubmit} CATEGORIES={CATEGORIES} />
-      <TaskList array={array} categorySelected={categorySelected} TASKS={TASKS} />
+      <TaskList handleDelete={handleDelete} categorySelected={categorySelected} TASKS={filteredArray} />
     </div>
   );
 }

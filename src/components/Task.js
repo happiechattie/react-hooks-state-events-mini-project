@@ -2,15 +2,15 @@ import React, { useState } from "react";
 
 function Task(props) {
 
-  function handleDelete(e){
-    e.target.parentNode.remove();
+  function handleClick(e){
+    props.handleDelete(props.text);
   }
 
   return (
     <div className="task">
       <div className="label">{props.category}</div>
       <div className="text">{props.text}</div>
-      <button onClick={handleDelete} className="delete">X</button>
+      <button onClick={handleClick} className="delete">X</button>
     </div>
   );
 }

@@ -2,15 +2,15 @@ import React from "react";
 import Task from "./Task";
 import { v4 as uuid } from "uuid";
 
-function TaskList(props) {
+function TaskList({TASKS, handleDelete}) {
 
-  const taskList = props.TASKS.map(task => (
+  const taskList = TASKS.map(task => (
     <Task
-    handleDelete={props.handleDelete}
-    key={uuid()}
-    className='task'
-    text={task.text}
-    category={task.category}/>
+      handleDelete={handleDelete}
+      key={uuid()}
+      className='task'
+      text={task.text}
+      category={task.category}/>
   ))
 
   return (

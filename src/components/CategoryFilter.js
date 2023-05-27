@@ -1,14 +1,27 @@
 import React, { useState } from "react";
 
-function CategoryFilter(props) {
+function CategoryFilter({CATEGORIES, categorySelected, changeCategory}) {
+
+  const categoryList = CATEGORIES.map((category, i) =>
+    {
+      const className = 
+        category === categorySelected ? "selected" : null
+      
+
+      return (<button
+        key={i}
+        onClick={e => handleCategory(category)}
+        className={className}
+      >
+        {category}
+      </button>);
+    }
+  );
+
 
   function handleCategory(category){
-    props.changeCategory(category);
+    changeCategory(category);
   }
-
-  const categoryList = props.CATEGORIES.map((category, i) => (
-    <button key={i} onClick={e => handleCategory(category)}>{category}</button>
-  ))
 
   return (
     <div className="categories">

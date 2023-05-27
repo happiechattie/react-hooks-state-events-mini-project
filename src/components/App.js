@@ -13,19 +13,10 @@ function App() {
   const [array, setArray] = useState(TASKS)
 
   function changeCategory(category){
-    const buttons = document.querySelector('.categories').querySelectorAll('button');
-    for (let i = 0; i < buttons.length; i++) {
-      if (category === buttons.innerText) 
-          buttons.item(i).className = 'selected';
-        else
-          buttons.item(i).className=null;
-    }
     setCategorySelected(category)
   }
 
-  const filteredArray = array.filter(task => {
-      if (categorySelected === 'All') return true;
-      else return (task.category === categorySelected)});
+  const filteredArray = array.filter(task => categorySelected === "All" || task.category === categorySelected);
 
 
   function handleSubmit(newTask){
@@ -39,7 +30,7 @@ function App() {
   return (
     <div className="App">
       <h2>My tasks</h2>
-      <CategoryFilter changeCategory={changeCategory} CATEGORIES={CATEGORIES}/>
+      <CategoryFilter categorySelected={categorySelected} changeCategory={changeCategory} CATEGORIES={CATEGORIES}/>
       <NewTaskForm onTaskFormSubmit={handleSubmit} CATEGORIES={CATEGORIES} />
       <TaskList handleDelete={handleDelete} categorySelected={categorySelected} TASKS={filteredArray} />
     </div>

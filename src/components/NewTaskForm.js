@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { v4 as uuid } from "uuid";
 
-function NewTaskForm(props) {
+function NewTaskForm({onTaskFormSubmit, CATEGORIES}) {
 
   const [text, setText] = useState('');
   const [category, setCategory] = useState('Code');
@@ -14,24 +14,9 @@ function NewTaskForm(props) {
     setCategory(e.target.value);
   }
 
-  // const [task, setTask] = useState({});
-
-  // function makeTask(e){
-  //   const newTask = {text: e.target.querySelector('input').value, category: e.target.querySelector('select').value}
-  //   setTask(newTask);
-  //   return newTask;
-  // }
-
-  // function handleSubmit(e){
-  //   e.preventDefault();
-  //   Promise.resolve(task).then(() => makeTask(e)).then((newTask) => {
-  //     props.onTaskFormSubmit(newTask);
-  //   })
-  // }
-
   function handleSubmit(e){
     e.preventDefault();
-    props.onTaskFormSubmit({
+    onTaskFormSubmit({
       id: text,
       text: text,
       category: category
@@ -39,9 +24,8 @@ function NewTaskForm(props) {
   }
 
   const categoryList = 
-    props.CATEGORIES.map(category => {
-      if (category !== 'All') return (<option key={uuid()}>{category}</option>)
-      else return null
+    CATEGORIES.map(category => {
+      return category !== 'All' ? (<option key={uuid()}>{category}</option>) : null
     });
 
   return (

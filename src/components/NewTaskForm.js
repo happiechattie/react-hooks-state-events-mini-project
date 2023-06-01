@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { v4 as uuid } from "uuid";
 
-function NewTaskForm({onTaskFormSubmit, CATEGORIES}) {
+function NewTaskForm({onTaskFormSubmit, categories}) {
 
   const [text, setText] = useState('');
   const [category, setCategory] = useState('Code');
@@ -24,7 +24,7 @@ function NewTaskForm({onTaskFormSubmit, CATEGORIES}) {
   }
 
   const categoryList = 
-    CATEGORIES.map(category => {
+    categories.map(category => {
       return category !== 'All' ? (<option key={uuid()}>{category}</option>) : null
     });
 

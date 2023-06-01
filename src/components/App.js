@@ -24,15 +24,15 @@ function App() {
   }
 
   function handleDelete(taskText){
-    setArray(array.filter(task => task.text !== taskText));
+    setArray(array.filter((task) => task.text !== taskText));
   }
 
   return (
     <div className="App">
       <h2>My tasks</h2>
-      <CategoryFilter categorySelected={categorySelected} changeCategory={changeCategory} CATEGORIES={CATEGORIES}/>
-      <NewTaskForm onTaskFormSubmit={handleSubmit} CATEGORIES={CATEGORIES} />
-      <TaskList handleDelete={handleDelete} categorySelected={categorySelected} TASKS={filteredArray} />
+      <CategoryFilter categorySelected={categorySelected} changeCategory={changeCategory} categories={CATEGORIES}/>
+      <NewTaskForm onTaskFormSubmit={handleSubmit} categories={CATEGORIES} />
+      <TaskList handleDelete={handleDelete} categorySelected={categorySelected} tasks={filteredArray} />
     </div>
   );
 }

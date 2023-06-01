@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-function CategoryFilter({CATEGORIES, categorySelected, changeCategory}) {
+function CategoryFilter({categories, categorySelected, changeCategory}) {
 
-  const categoryList = CATEGORIES.map((category, i) =>
+  const categoryList = categories.map((category, i) =>
     {
       const className = 
         category === categorySelected ? "selected" : null
